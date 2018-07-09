@@ -1,40 +1,40 @@
 'use strict';
 
-var tasks = require('../controllers/tasks.ctrl');
+const vehicles = require('../controllers/vehicles.ctrl');
 
 module.exports = function(router) {
 	// Get the version of the application from the package.json file
-	router.get('/version', function (req, res, next) {
-        var currentVersion = {"version":require('../../package.json').version};
+	router.get('/version', function (req, res) {
+        let currentVersion = {"version":require('../../package.json').version};
 		console.log(currentVersion);
     	res.json(currentVersion);
     });
 
-    // Get all tasks
-    router.get('/tasks', function (req, res, next) {
-		tasks.getAll().then(function(datas){
-			res.json(datas);
+    // Get all vehicles
+    router.get('/vehicle', function (req, res) {
+		vehicles.getAll().then(function(data){
+			res.json(data);
     	});
     });
 
-    // Delete one task
-	router.delete('/tasks/:id', function (req, res, next) {
-		tasks.remove(req.params.id).then(function(datas){
-			res.json(datas);
+    // Delete one vehicle
+	router.delete('/vehicle/:id', function (req, res) {
+		vehicles.remove(req.params.id).then(function(data){
+			res.json(data);
     	});
     });
 
-    // Add a task
-	router.post('/tasks/', function (req, res) {
-		tasks.add(req.body).then(function(datas){
-			res.json(datas);
+    // Add a vehicle
+	router.post('/vehicle', function (req, res) {
+		vehicles.add(req.body).then(function(data){
+			res.json(data);
     	});
     });
 
-    // Update a task
-    router.put('/tasks/', function (req, res) {
-        tasks.update(req.body).then(function(datas){
-            res.json(datas);
+    // Update a vehicle
+    router.put('/vehicle', function (req, res) {
+        vehicles.update(req.body).then(function(data){
+            res.json(data);
         });
     });
 };
